@@ -1,7 +1,9 @@
 PromiseClass
 =======================
 
-Create your own chain Promise Class easyly.
+![PromiseClass logo](https://raw.github.com/yaniswang/PromiseClass/master/logo.png)
+
+Create your own chain Promise Class easily.
 
 [![Build Status](https://img.shields.io/travis/yaniswang/PromiseClass.svg)](https://travis-ci.org/yaniswang/PromiseClass)
 [![Coverage Status](https://img.shields.io/coveralls/yaniswang/PromiseClass.svg)](https://coveralls.io/github/yaniswang/PromiseClass?branch=master)

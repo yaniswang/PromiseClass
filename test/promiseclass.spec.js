@@ -24,6 +24,17 @@ describe('PromiseClass Constructor test : ', function(){
         }).catch(done);
     });
 
+    it('should return promise when no constructor', function(done){
+        var App = PromiseClass.create({
+            method(n){
+                return n;
+            }
+        });
+        new App().method(11).then(function(){
+            done();
+        }).catch(done);
+    });
+
 });
 
 describe('PromiseClass Propertie test : ', function(){

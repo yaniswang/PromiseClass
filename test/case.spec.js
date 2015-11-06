@@ -76,3 +76,67 @@ describe('PromiseClass Generator test : ', function(){
     });
 
 });
+
+describe('PromiseClass other test : ', function(){
+
+    it('all kind of callback should work well', function(done){
+        co(function*(){
+            var callbackCount = 0;
+            var App = PromiseClass.create({
+                method(n, done){
+                    done(null, n);
+                }
+            });
+            var app = new App();
+            yield app.method(1, function(error){
+                !error && callbackCount ++;
+            });
+            yield app.method(2, function(err){
+                !err && callbackCount ++;
+            });
+            yield app.method(3, function(e){
+                !e && callbackCount ++;
+            });
+            yield app.method(4, function done(){
+                callbackCount ++;
+            });
+            yield app.method(5, function callback(){
+                callbackCount ++;
+            });
+            yield app.method(6, function cb(){
+                callbackCount ++;
+            });
+            expect(callbackCount).to.be(6);
+            done();
+        }).catch(done);
+    });
+
+    it('type of the first argument is function should work well', function(done){
+        co(function*(){
+            var App = PromiseClass.create({
+                method(n, done){
+                    done();
+                }
+            });
+            var callbackCount = 0;
+            var app = new App();
+            yield app.method(function(){
+                throw new Error('test');
+            });
+            yield app.method(function(){
+                throw new Error('test');
+            }, function(err){
+                !err && callbackCount ++;
+            });
+            yield app.method(function(arg){
+                !arg;
+                throw new Error('test');
+            }, function done(){
+                callbackCount ++;
+            });
+            expect(callbackCount).to.be(2);
+            done();
+        }).catch(done);
+    });
+
+});

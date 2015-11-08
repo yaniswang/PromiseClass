@@ -9,19 +9,17 @@ var PromiseClass = require('../');
 
 describe('PromiseClass Constructor test : ', function(){
 
-    it('should define constructor and return value', function(done){
+    it('should define constructor and been called', function(done){
         var isInited = false;
         var App = PromiseClass.create({
-            constructor(str){
+            constructor(){
                 isInited = true;
-                return str;
             }
         });
-        new App('test').then(function(ret){
-            expect(isInited).to.be(true);
-            expect(ret).to.be('test');
-            done();
-        }).catch(done);
+        var app = new App();
+        expect(app).to.be.an('object');
+        expect(isInited).to.be(true);
+        done();
     });
 
     it('should return promise when no constructor', function(done){
@@ -57,8 +55,8 @@ describe('PromiseClass Propertie test : ', function(){
             }
         });
         var app = new App();
-        expect(app.propertie1).to.be(undefined);
-        expect(app.propertie2).to.be(undefined);
+        expect(app.propertie1).to.be(3);
+        expect(app.propertie2).to.be(4);
         app.checkProperties().then(function(){
             done();
         }).catch(done);
@@ -225,17 +223,6 @@ describe('PromiseClass Chain test : ', function(){
 
 describe('PromiseClass Error test : ', function(){
 
-    it('should catch constructor error', function(done){
-        var App = PromiseClass.create({
-            constructor(){
-                throw new Error('test');
-            }
-        });
-        new App().catch(function(){
-            done();
-        });
-    });
-
     it('should catch method error', function(done){
         var App = PromiseClass.create({
             method1: function(){
@@ -252,6 +239,31 @@ describe('PromiseClass Error test : ', function(){
         }).method2().catch(function(){
             done();
         });
+    });
+
+});
+
+describe('PromiseClass instanceof test : ', function(){
+
+    it('should instanceof Class', function(){
+        var App = PromiseClass.create({
+            constructor(){
+
+            }
+        });
+        var app = new App();
+        expect(app instanceof App).to.be(true);
+    });
+
+    it('should instanceof Promise', function(){
+        var App = PromiseClass.create({
+            method(){
+
+            }
+        });
+        var app = new App();
+        var promise = app.method();
+        expect(promise instanceof Promise).to.be(true);
     });
 
 });

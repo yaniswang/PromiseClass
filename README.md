@@ -21,6 +21,7 @@ Features
 4. Support sync & async method define
 5. Support addMethod & addPropertie after class define
 6. Support generator & ES7 await
+7. Support async callback & promise & generator mix use
 
 Quick start
 ======================
@@ -34,7 +35,6 @@ Try it:
 
         constructor(str){
             console.log('constructor:',str);
-            return 'constructor return : '+str;
         },
 
         syncMethod(n){

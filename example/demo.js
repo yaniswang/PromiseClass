@@ -5,7 +5,6 @@ var App = PromiseClass.create({
 
     constructor(str){
         console.log('constructor:',str);
-        return 'constructor return : '+str;
     },
 
     syncMethod(n){
@@ -101,7 +100,7 @@ function generator(){
             console.log(ret);
         });
     }).then(function(){
-        console.log('done:');
+        console.log('done!');
         console.log('================ generator end ================');
         console.log('');
         deferred.resolve();

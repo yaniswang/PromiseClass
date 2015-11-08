@@ -15,9 +15,8 @@ describe('PromiseClass Generator test : ', function(){
             var isInited = false;
             var isMethod2Called = false;
             var App = PromiseClass.create({
-                constructor(str){
+                constructor(){
                     isInited = true;
-                    return str;
                 },
                 method1(n){
                     return n;
@@ -29,11 +28,8 @@ describe('PromiseClass Generator test : ', function(){
                     }, 10);
                 }
             });
-            var app = new App('test');
-            app.then(function(ret){
-                expect(ret).to.be('test');
-                expect(isInited).to.be(true);
-            });
+            var app = new App();
+            expect(isInited).to.be(true);
             yield app.method2(111).then(function(ret){
                 expect(ret).to.be(111);
             }).method1(222).then(function(ret){
@@ -135,6 +131,25 @@ describe('PromiseClass other test : ', function(){
                 callbackCount ++;
             });
             expect(callbackCount).to.be(2);
+            done();
+        }).catch(done);
+    });
+
+    it('method should return PromiseClass object', function(done){
+        co(function*(){
+            var App1 = PromiseClass.create({
+                method1(){
+                    return new App2();
+                }
+            });
+            var App2 = PromiseClass.create({
+                method2(){
+                    return 2;
+                }
+            });
+            var app1 = new App1();
+            var app2 = yield app1.method1();
+            expect(app2 instanceof App2).to.be(true);
             done();
         }).catch(done);
     });

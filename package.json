@@ -1,11 +1,12 @@
 {
   "name": "promiseclass",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "Create Promise chain Class",
   "main": "./index",
-  "dependencies": {},
+  "dependencies": {
+    "co": "4.6.0"
+  },
   "devDependencies": {
-    "co": "4.6.0",
     "expect.js": "0.3.1",
     "grunt": "0.4.1",
     "grunt-cli": "0.1.6",
@@ -15,7 +16,8 @@
     "grunt-exec": "0.4.0",
     "istanbul": "0.3.22",
     "istanbul-coveralls": "1.0.3",
-    "mocha": "2.3.3"
+    "mocha": "2.3.3",
+    "mocha-generators": "1.2.0"
   },
   "scripts": {
     "test": "mocha"

@@ -229,7 +229,7 @@ Thanks
 ================
 
 * mocha: [https://github.com/visionmedia/mocha](https://github.com/visionmedia/mocha)
-* expect.js: [https://github.com/LearnBoost/expect.js](https://github.com/LearnBoost/expect.js)
+* chai: [https://github.com/chaijs/chai](https://github.com/chaijs/chai)
 * istanbul: [https://github.com/gotwarlost/istanbul](https://github.com/gotwarlost/istanbul)
 * Grunt: [http://gruntjs.com/](http://gruntjs.com/)
 * jshint: [https://github.com/jshint/jshint](https://github.com/jshint/jshint)

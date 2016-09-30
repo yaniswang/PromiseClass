@@ -1,6 +1,12 @@
 PromiseClass change log
 ====================
 
+## ver 1.0.0 (2016-9-30)
+
+add:
+
+1. Support chai
+
 ## ver 0.9.5 (2015-11-9)
 
 add:

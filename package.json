@@ -1,13 +1,13 @@
 {
   "name": "promiseclass",
-  "version": "0.9.5",
+  "version": "1.0.0",
   "description": "Create Promise chain Class",
   "main": "./index",
   "dependencies": {
     "co": "4.6.0"
   },
   "devDependencies": {
-    "expect.js": "0.3.1",
+    "chai": "3.5.0",
     "grunt": "0.4.1",
     "grunt-cli": "0.1.6",
     "grunt-contrib-clean": "0.4.0",

@@ -23,11 +23,13 @@ Features
 6. Support generator & ES7 await
 7. Support async callback & promise & generator mix use
 8. Supoort define generator method, and promise callback support generator function
+9. Support chai
 
 Quick start
 ======================
 
 Try it:
+-----------------
 
     var PromiseClass = require('promiseclass');
     var co = require('co');
@@ -170,6 +172,30 @@ Try it:
     });
 
 
+Try chai
+-----------------------
+
+    var PromiseClass = require('promiseclass');
+    var chai = require("chai");
+    chai.should();
+    chai.use(PromiseClass.chaiSupportChainPromise);
+
+    var App = PromiseClass.create({
+        asyncMethod(n, done){
+            setTimeout(function(){
+                done(null, n);
+            }, n);
+        },
+    });
+
+    var app = new App();
+
+    describe('chai test', function(){
+        it('test', function(){
+            return app.asyncMethod(100).should.equal(100)
+            .asyncMethod(88).should.equal(88);
+        });
+    });
 
 
 License
@@ -179,7 +205,7 @@ PromiseClass is released under the MIT license:
 
 > The MIT License
 >
-> Copyright (c) 2015 Yanis Wang \< yanis.wang@gmail.com \>
+> Copyright (c) 2015-2016 Yanis Wang \< yanis.wang@gmail.com \>
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal

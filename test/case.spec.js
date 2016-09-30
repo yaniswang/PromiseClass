@@ -1,12 +1,14 @@
 /**
- * Copyright (c) 2015, Yanis Wang <yanis.wang@gmail.com>
+ * Copyright (c) 2015-2016, Yanis Wang <yanis.wang@gmail.com>
  * MIT Licensed
  */
 
-var expect  = require("expect.js");
-require('mocha-generators').install();
-
 var PromiseClass = require('../');
+var chai = require("chai");
+chai.should();
+chai.use(PromiseClass.chaiSupportChainPromise);
+
+require('mocha-generators').install();
 
 describe('PromiseClass other test : ', function(){
 
@@ -36,7 +38,7 @@ describe('PromiseClass other test : ', function(){
         yield app.method(6, function cb(){
             callbackCount ++;
         });
-        expect(callbackCount).to.be(6);
+        callbackCount.should.equal(6);
     });
 
     it('type of the first argument is function should work well', function*(){
@@ -61,7 +63,7 @@ describe('PromiseClass other test : ', function(){
         }, function done(){
             callbackCount ++;
         });
-        expect(callbackCount).to.be(2);
+        callbackCount.should.equal(2);
     });
 
     it('method should return PromiseClass object', function*(){
@@ -77,7 +79,7 @@ describe('PromiseClass other test : ', function(){
         });
         var app1 = new App1();
         var app2 = yield app1.method1();
-        expect(app2 instanceof App2).to.be(true);
+        app2.should.be.instanceof(App2);
     });
 
 });

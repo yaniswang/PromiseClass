@@ -1,12 +1,14 @@
 /**
- * Copyright (c) 2015, Yanis Wang <yanis.wang@gmail.com>
+ * Copyright (c) 2015-2016, Yanis Wang <yanis.wang@gmail.com>
  * MIT Licensed
  */
 
-var expect  = require("expect.js");
-require('mocha-generators').install();
-
 var PromiseClass = require('../');
+var chai = require("chai");
+var should = chai.should();
+chai.use(PromiseClass.chaiSupportChainPromise);
+
+require('mocha-generators').install();
 
 describe('PromiseClass Constructor test : ', function(){
 
@@ -18,8 +20,8 @@ describe('PromiseClass Constructor test : ', function(){
             }
         });
         var app = new App();
-        expect(app).to.be.an('object');
-        expect(isInited).to.be(true);
+        app.should.be.an('object');
+        isInited.should.be.true;
     });
 
     it('should return promise when no constructor', function(done){
@@ -43,20 +45,20 @@ describe('PromiseClass Propertie test : ', function(){
             propertie2: 2,
             constructor(){
                 var self = this;
-                expect(self.propertie1).to.be(1);
-                expect(self.propertie2).to.be(2);
+                self.propertie1.should.equal(1);
+                self.propertie2.should.equal(2);
                 self.propertie1 = 3;
                 self.propertie2 = 4;
             },
             checkProperties(){
                 var self = this;
-                expect(self.propertie1).to.be(3);
-                expect(self.propertie2).to.be(4);
+                self.propertie1.should.equal(3);
+                self.propertie2.should.equal(4);
             }
         });
         var app = new App();
-        expect(app.propertie1).to.be(3);
-        expect(app.propertie2).to.be(4);
+        app.propertie1.should.equal(3);
+        app.propertie2.should.equal(4);
         app.checkProperties();
     });
 
@@ -64,13 +66,13 @@ describe('PromiseClass Propertie test : ', function(){
         var App = PromiseClass.create({
             constructor(){
                 var self = this;
-                expect(self.propertie1).to.be(undefined);
-                expect(self.propertie2).to.be(undefined);
+                should.equal(self.propertie1, undefined);
+                should.equal(self.propertie2, undefined);
             },
             checkProperties(){
                 var self = this;
-                expect(self.propertie1).to.be(1);
-                expect(self.propertie2).to.be(2);
+                self.propertie1.should.equal(1);
+                self.propertie2.should.equal(2);
             }
         });
         var app = new App();
@@ -88,7 +90,7 @@ describe('PromiseClass Method test : ', function(){
         var App = PromiseClass.create({
             constructor(){
                 var self = this;
-                expect(typeof self.method).to.be('function');
+                self.method.should.be.a('function');
             },
             method(str){
                 isCalled = true;
@@ -97,11 +99,11 @@ describe('PromiseClass Method test : ', function(){
         });
         var app = new App();
         app.method(111, function(error, ret){
-            expect(ret).to.be(111);
+            ret.should.equal(111);
             return 222;
         }).then(function(ret){
-            expect(isCalled).to.be(true);
-            expect(ret).to.be(222);
+            isCalled.should.equal.true;
+            ret.should.equal(222);
             done();
         }).catch(done);
     });
@@ -111,7 +113,7 @@ describe('PromiseClass Method test : ', function(){
         var App = PromiseClass.create({
             constructor(){
                 var self = this;
-                expect(self.method).to.be(undefined);
+                should.equal(self.method, undefined);
             }
         });
         var app = new App();
@@ -120,11 +122,11 @@ describe('PromiseClass Method test : ', function(){
             return str;
         });
         app.method(222, function(error, ret){
-            expect(ret).to.be(222);
+            ret.should.equal(222);
             return 333;
         }).then(function(ret){
-            expect(isCalled).to.be(true);
-            expect(ret).to.be(333);
+            isCalled.should.be.true;
+            ret.should.equal(333);
             done();
         }).catch(done);
     });
@@ -134,7 +136,7 @@ describe('PromiseClass Method test : ', function(){
         var App = PromiseClass.create({
             constructor(){
                 var self = this;
-                expect(typeof self.method).to.be('function');
+                self.method.should.be.a('function');
             },
             method(str, done){
                 isCalled = true;
@@ -145,11 +147,11 @@ describe('PromiseClass Method test : ', function(){
         });
         var app = new App();
         app.method(222, function(error, ret){
-            expect(ret).to.be(222);
+            ret.should.equal(222);
             return 333;
         }).then(function(ret){
-            expect(isCalled).to.be(true);
-            expect(ret).to.be(333);
+            isCalled.should.be.true;
+            ret.should.equal(333);
             done();
         }).catch(done);
     });
@@ -159,7 +161,7 @@ describe('PromiseClass Method test : ', function(){
         var App = PromiseClass.create({
             constructor(){
                 var self = this;
-                expect(self.method).to.be(undefined);
+                should.equal(self.method, undefined);
             }
         });
         var app = new App();
@@ -170,11 +172,11 @@ describe('PromiseClass Method test : ', function(){
             }, 10);
         });
         app.method(222, function(error, ret){
-            expect(ret).to.be(222);
+            ret.should.equal(222);
             return 333;
         }).then(function(ret){
-            expect(isCalled).to.be(true);
-            expect(ret).to.be(333);
+            isCalled.should.be.true;
+            ret.should.equal(333);
             done();
         }).catch(done);
     });
@@ -207,14 +209,14 @@ describe('PromiseClass Chain test : ', function(){
             }
         });
         new App().method1(111).then(function(ret){
-            expect(ret).to.be(111);
+            ret.should.equal(111);
         }).method2(222).then(function(ret){
-            expect(ret).to.be(222);
+            ret.should.equal(222);
         }).method3(333).then(function(ret){
-            expect(ret).to.be(333);
+            ret.should.equal(333);
         }).method1(444).then(function(ret){
-            expect(ret).to.be(444);
-            expect(callCount).to.be(6);
+            ret.should.equal(444);
+            callCount.should.equal(6);
             done();
         }).catch(done);
     });
@@ -235,7 +237,7 @@ describe('PromiseClass Error test : ', function(){
             }
         });
         new App().method1().catch(function(error){
-            expect(/is not defined/.test(error.message)).to.be(true);
+            error.message.should.contain('is not defined');
         }).method2().catch(function(){
             done();
         });
@@ -252,7 +254,7 @@ describe('PromiseClass instanceof test : ', function(){
             }
         });
         var app = new App();
-        expect(app instanceof App).to.be(true);
+        app.should.instanceof(App);
     });
 
     it('should instanceof Promise', function(){
@@ -263,7 +265,7 @@ describe('PromiseClass instanceof test : ', function(){
         });
         var app = new App();
         var promise = app.method();
-        expect(promise instanceof Promise).to.be(true);
+        promise.should.instanceof(Promise);
     });
 
 });
@@ -288,13 +290,13 @@ describe('PromiseClass Generator test : ', function(){
             }
         });
         var app = new App();
-        expect(isInited).to.be(true);
+        isInited.should.be.true;
         yield app.method2(111).then(function(ret){
-            expect(ret).to.be(111);
+            ret.should.equal(111);
         }).method1(222).then(function(ret){
-            expect(ret).to.be(222);
+            ret.should.equal(222);
         });
-        expect(isMethod2Called).to.be(true);
+        isMethod2Called.should.be.true;
     });
 
     it('should catch sync method error', function(done){
@@ -332,10 +334,10 @@ describe('PromiseClass Generator test : ', function(){
         });
         var app = new App();
         yield app.method(11, function(error, ret){
-            expect(this.aaa).to.be(11);
-            expect(ret).to.be(11);
+            this.aaa.should.equal(11);
+            ret.should.equal(11);
         }).method(22).then(function(ret){
-            expect(ret).to.be(22);
+            ret.should.equal(22);
         });
     });
 
@@ -348,10 +350,10 @@ describe('PromiseClass Generator test : ', function(){
         });
         var app = new App();
         yield app.method(11, function(error, ret){
-            expect(this.aaa).to.be(11);
-            expect(ret).to.be(11);
+            this.aaa.should.equal(11);
+            ret.should.equal(11);
         }).method(22).then(function(ret){
-            expect(ret).to.be(22);
+            ret.should.equal(22);
         });
     });
 
@@ -364,29 +366,29 @@ describe('PromiseClass Generator test : ', function(){
         var app = new App();
         yield app.method(11, function*(error, ret){
             // check async callback
-            expect(ret).to.be(11);
+            ret.should.equal(11);
             return yield sleep(22);
         }).then(function*(ret){
             // check promise callback
-            expect(ret).to.be(22);
+            ret.should.equal(22);
             return yield sleep(33);
         }).then(function(ret){
             // check promise onReject callback
-            expect(ret).to.be(33);
+            ret.should.equal(33);
             throw new Error('test');
         }).then(function(){
         }, function*(error){
-            expect(error.message).to.contain('not defined');
+            error.message.should.contain('not defined');
             return yield sleep(44);
         }).then(function(ret){
             // check promise catch callback
-            expect(ret).to.be(44);
+            ret.should.equal(44);
             throw new Error('test');
         }).catch(function*(error){
-            expect(error.message).to.contain('not defined');
+            error.message.should.contain('not defined');
             return yield sleep(55);
         }).then(function(ret){
-            expect(ret).to.be(55);
+            ret.should.equal(55);
         });
     });
 

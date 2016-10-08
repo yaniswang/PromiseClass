@@ -1,6 +1,12 @@
 PromiseClass change log
 ====================
 
+## ver 1.0.1 (2016-10-8)
+
+add:
+
+1. bind this to then callback
+
 ## ver 1.0.0 (2016-9-30)
 
 add:

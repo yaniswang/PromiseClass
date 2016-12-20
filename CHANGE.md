@@ -1,6 +1,10 @@
 PromiseClass change log
 ====================
 
+## ver 1.0.2 (2016-12-20)
+
+1. Fix: fix issue when catch error by promise
+
 ## ver 1.0.1 (2016-10-8)
 
 add:

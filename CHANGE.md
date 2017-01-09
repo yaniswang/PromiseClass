@@ -1,6 +1,10 @@
 PromiseClass change log
 ====================
 
+## ver 1.0.3 (2017-1-9)
+
+1. Fix: fix issue run in node 7.x
+
 ## ver 1.0.2 (2016-12-20)
 
 1. Fix: fix issue when catch error by promise

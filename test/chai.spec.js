@@ -13,11 +13,11 @@ var App = PromiseClass.create({
     },
     asyncMethod2(done){
         setTimeout(function(){
-        	done(new Error('ttt'))
-        }, 100)
+        	done(new Error('ttt'));
+        }, 100);
     },
     asyncMethod3(){
-        asdfa();
+        throw('ttt');
     }
 });
 
